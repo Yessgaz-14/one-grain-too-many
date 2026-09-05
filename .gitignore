@@ -1,0 +1,16 @@
+.Rhistory
+.RData
+.RDataTmp
+.Rproj.user/
+*.Rproj
+*.log
+*.aux
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+Data/
+IPUMS/
+Salinity data/
+MT2/
+tmp/

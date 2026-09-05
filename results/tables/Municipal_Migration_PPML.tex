@@ -1,0 +1,50 @@
+
+\begin{table}[htbp]
+\color{red}
+   \caption{\label{tab:full_revision_rural_migration_ppml} Soil Salinity and Municipal Migration from Rural Origins}
+   \centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{0.86}
+   \begin{tabular}{lcc}
+      \tabularnewline \midrule \midrule
+      Dependent Variable: & \multicolumn{2}{c}{Migrant flow (origin-population offset)}\\
+      Model:                           & (1)      & (2)\\  
+      \midrule
+      \emph{Variables}\\
+      Origin mean salinity (std.)      & -0.0141  & -0.0124\\   
+                                       & (0.0152) & (0.0144)\\   
+      Destination mean salinity (std.) & 0.0061   & 0.0030\\   
+                                       & (0.0227) & (0.0214)\\   
+      Origin GDD (std.)                &          & 0.0154\\   
+                                       &          & (0.0297)\\   
+      Origin KDD (std.)                &          & 0.0876$^{*}$\\   
+                                       &          & (0.0521)\\   
+      Origin soil moisture (std.)      &          & 0.1184$^{***}$\\   
+                                       &          & (0.0407)\\   
+      Destination GDD (std.)           &          & 0.0072\\   
+                                       &          & (0.0259)\\   
+      Destination KDD (std.)           &          & 0.1075$^{**}$\\   
+                                       &          & (0.0429)\\   
+      Destination soil moisture (std.) &          & 0.0687\\   
+                                       &          & (0.0435)\\   
+      \midrule
+      \emph{Fixed-effects}\\
+      Dyad fixed effects                             & Yes      & Yes\\  
+      Origin-state-by-window fixed effects                 & Yes      & Yes\\  
+      Destination-state-by-window fixed effects                 & Yes      & Yes\\  
+      \midrule
+      \emph{Fit statistics}\\
+      Observations                     & 111,310  & 111,310\\  
+      Squared Correlation              & 0.88048  & 0.88199\\  
+      Pseudo R$^2$                     & 0.79763  & 0.79810\\  
+      \midrule \midrule
+      \multicolumn{3}{l}{\emph{Clustered (orig \& dest) standard-errors in parentheses}}\\
+      \multicolumn{3}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+   \end{tabular}
+   
+   \par \raggedright 
+   Notes: PPML estimates of weighted bilateral migration flows for people aged 15 or older. The flow records the last intermunicipal move and is assigned to a five-year window from the reported duration in the current municipality. Origins are rural when at least 50 percent of their weighted population lived in rural areas in the baseline census; destinations are unrestricted. The estimated windows are 1986--1990, 2001--2005 and 2006--2010. Salinity, GDD, KDD and soil moisture are measured in 1985, 2000 and 2005, respectively, before the corresponding migration window, and standardized within window. Both columns include dyad, origin-state-by-window and destination-state-by-window fixed effects. Column 2 is preferred and adds GDD, KDD and soil moisture at origin and destination; precipitation and income are excluded. The offset is the weighted population aged 15 or older in the origin baseline census. All columns use the same final sample; standard errors are two-way clustered by origin and destination.
+\end{table}
+
+

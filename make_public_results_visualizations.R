@@ -166,24 +166,18 @@ cropland_plot_data <- data.frame(
 cropland_figure <- ggplot(cropland_plot_data, aes(x = estimate, y = y)) +
   geom_vline(xintercept = 0, color = "#1F2933", linewidth = 1.0) +
   geom_segment(
-    aes(x = 0, xend = estimate, yend = y),
-    color = "#B33A3A",
-    linewidth = 4.5,
-    lineend = "round"
-  ) +
-  geom_segment(
-    aes(x = low, xend = high, y = 0.87, yend = 0.87),
+    aes(x = low, xend = high, yend = y),
     color = "#68727D",
     linewidth = 1.5,
     lineend = "round"
   ) +
   geom_segment(
-    aes(x = low, xend = low, y = 0.83, yend = 0.91),
+    aes(x = low, xend = low, y = 0.95, yend = 1.05),
     color = "#68727D",
     linewidth = 1.3
   ) +
   geom_segment(
-    aes(x = high, xend = high, y = 0.83, yend = 0.91),
+    aes(x = high, xend = high, y = 0.95, yend = 1.05),
     color = "#68727D",
     linewidth = 1.3
   ) +

@@ -166,52 +166,61 @@ cropland_plot_data <- data.frame(
 )
 
 cropland_figure <- ggplot(cropland_plot_data, aes(x = estimate, y = y)) +
+  geom_vline(xintercept = 0, color = "#1F2933", linewidth = 1.0) +
+  geom_segment(
+    aes(x = 0, xend = estimate, yend = y),
+    color = "#CDE8E2",
+    linewidth = 15,
+    lineend = "butt"
+  ) +
   geom_segment(
     aes(x = low, xend = high, yend = y),
-    color = "#A7D5CB",
-    linewidth = 8,
+    color = "#00796B",
+    linewidth = 1.7,
     lineend = "round"
+  ) +
+  geom_segment(
+    aes(x = low, xend = low, y = 0.95, yend = 1.05),
+    color = "#00796B",
+    linewidth = 1.4
+  ) +
+  geom_segment(
+    aes(x = high, xend = high, y = 0.95, yend = 1.05),
+    color = "#00796B",
+    linewidth = 1.4
   ) +
   geom_point(color = "#00796B", size = 8) +
   annotate(
     "text",
     x = fewer_hectares,
     y = 1.13,
-    label = paste0(round(fewer_hectares), " fewer hectares per year"),
+    label = paste0(round(fewer_hectares), " hectares lower"),
     color = "#005F56",
     size = 6.2,
     fontface = "bold"
   ) +
-  annotate(
-    "text",
-    x = mean(c(fewer_hectares_low, fewer_hectares_high)),
-    y = 0.87,
-    label = paste0(
-      "95% uncertainty range: ", round(fewer_hectares_low),
-      " to ", round(fewer_hectares_high), " hectares"
-    ),
-    color = "#3F4A52",
-    size = 4.4
-  ) +
   scale_x_continuous(
-    limits = c(0, 110),
+    limits = c(-5, 105),
     breaks = seq(0, 100, 25),
     labels = function(x) paste0(x, " ha")
   ) +
   coord_cartesian(ylim = c(0.72, 1.27), clip = "off") +
   labs(
-    title = "What the cultivated-area estimate means in hectares",
+    title = "Higher salinity is associated with a lower one-year change in cultivated area",
     subtitle = paste(
-      "Illustration for two neighboring municipalities of 100,000 hectares:",
-      "when mean salinity is 1 dS/m higher, the annual change in cultivated area is lower.",
+      "Illustration for two neighboring municipalities of 100,000 hectares",
+      "that differ by 1 dS/m in mean salinity.",
       sep = "\n"
     ),
-    x = "Estimated shortfall in the annual change in cultivated area",
+    x = "Lower annual change in cultivated area",
     y = NULL,
     caption = paste(
       "Source: MapBiomas and Hassani et al. (2020). All crops combined; pasture excluded; 1985-2017.",
-      "This is a relative difference in the annual change between neighboring municipalities,",
-      "not evidence that every municipality loses this amount of cultivated land each year.",
+      paste0(
+        "The bar starts at no difference (0); the thin line is the 95% interval (",
+        round(fewer_hectares_low), "-", round(fewer_hectares_high), " ha)."
+      ),
+      "The estimate can reflect less expansion or greater contraction; it does not mean every municipality loses 65 ha.",
       "Preferred model with year fixed effects, climate controls, and Conley standard errors (200 km).",
       sep = "\n"
     )

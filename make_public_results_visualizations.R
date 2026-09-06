@@ -101,10 +101,10 @@ yield_figure <- ggplot(yield, aes(x = estimate_pct, y = crop_label, color = evid
     x = "Estimated difference in crop yield",
     y = NULL,
     caption = paste(
-      "HOW TO READ: Left of 0 means a lower estimated yield. If a horizontal line crosses 0, the direction remains uncertain.",
+      "Values to the left of 0 indicate a lower estimated yield. If a horizontal line crosses 0, the direction remains uncertain.",
       "Red estimates remain below 0 across their 95% interval; grey estimates are less precise.",
       "",
-      "METHOD: Preferred spatial first-difference estimates compare neighboring municipalities and control for year and climate.",
+      "Preferred spatial first-difference estimates compare neighboring municipalities and control for year and climate.",
       "Lines show 95% intervals based on Conley standard errors (200 km). Source: IBGE/PAM and Hassani et al. (2020).",
       sep = "\n"
     )
@@ -214,12 +214,12 @@ cropland_figure <- ggplot(cropland_plot_data, aes(x = estimate, y = y)) +
     y = NULL,
     caption = paste(
       paste0(
-        "HOW TO READ: The black line marks no difference (0). The red point is the estimate; the grey line is its 95% interval (",
+        "The black line marks no difference (0). The red point is the estimate; the grey line is its 95% interval (",
         round(fewer_hectares_low), "-", round(fewer_hectares_high), " ha)."
       ),
       "The estimate can reflect less expansion or greater contraction; it is not an automatic loss of 65 ha in every municipality.",
       "",
-      "METHOD: The preferred model compares neighboring municipalities and controls for year and climate.",
+      "The preferred model compares neighboring municipalities and controls for year and climate.",
       "The percentage-point coefficient is converted to hectares for a 100,000-ha municipality; Conley standard errors use 200 km.",
       "Source: MapBiomas and Hassani et al. (2020). All crops combined; pasture excluded; 1985-2017.",
       sep = "\n"

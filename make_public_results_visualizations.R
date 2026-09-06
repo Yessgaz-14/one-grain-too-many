@@ -59,14 +59,18 @@ yield$ci95_low_pct <- 100 * (exp(yield$ci95_low) - 1)
 yield$ci95_high_pct <- 100 * (exp(yield$ci95_high) - 1)
 yield$evidence <- ifelse(
   yield$estimate < 0 & yield$p_value < 0.05,
-  "Clear evidence of a decrease",
+  "Robust evidence of a decrease",
   "Estimate remains uncertain"
+)
+yield$evidence <- factor(
+  yield$evidence,
+  levels = c("Robust evidence of a decrease", "Estimate remains uncertain")
 )
 yield$crop_label <- factor(yield$crop_label, levels = rev(crop_order))
 yield$point_label <- sprintf("%+.1f%%", yield$estimate_pct)
 
 evidence_colors <- c(
-  "Clear evidence of a decrease" = "#B33A3A",
+  "Robust evidence of a decrease" = "#B33A3A",
   "Estimate remains uncertain" = "#68727D"
 )
 

@@ -97,17 +97,15 @@ yield_figure <- ggplot(yield, aes(x = estimate_pct, y = crop_label, color = evid
   ) +
   labs(
     title = "Higher excess salinity is linked to lower corn and bean yields",
-    subtitle = paste(
-      "Estimated yield difference associated with 1 dS/m more excess salinity.",
-      "Points show the preferred estimate; lines show the 95% uncertainty range.",
-      sep = "\n"
-    ),
+    subtitle = "Estimated yield difference associated with 1 dS/m more excess salinity, Brazil, 1985-2018.",
     x = "Estimated difference in crop yield",
     y = NULL,
     caption = paste(
-      "Source: IBGE/PAM and Hassani et al. (2020). Brazil, 1985-2018.",
-      "The preferred spatial first-difference model compares neighboring municipalities,",
-      "includes year fixed effects and climate controls, and uses Conley standard errors (200 km).",
+      "HOW TO READ: Left of 0 means a lower estimated yield. If a horizontal line crosses 0, the direction remains uncertain.",
+      "Red estimates remain below 0 across their 95% interval; grey estimates are less precise.",
+      "",
+      "METHOD: Preferred spatial first-difference estimates compare neighboring municipalities and control for year and climate.",
+      "Lines show 95% intervals based on Conley standard errors (200 km). Source: IBGE/PAM and Hassani et al. (2020).",
       sep = "\n"
     )
   ) +
@@ -118,12 +116,12 @@ yield_figure <- ggplot(yield, aes(x = estimate_pct, y = crop_label, color = evid
     axis.text.y = element_text(size = 14, face = "bold", color = "#263238"),
     axis.text.x = element_text(size = 12, color = "#374151"),
     axis.title.x = element_text(size = 13, face = "bold", margin = margin(t = 10)),
-    legend.position = "top",
+    legend.position = "bottom",
     legend.justification = "left",
     legend.text = element_text(size = 12),
     plot.title = element_text(size = 20, face = "bold", color = "#18212A"),
     plot.subtitle = element_text(size = 13, color = "#374151", lineheight = 1.05),
-    plot.caption = element_text(size = 9.5, color = "#4B5563", hjust = 0, lineheight = 1.0),
+    plot.caption = element_text(size = 10, color = "#4B5563", hjust = 0, lineheight = 1.0),
     plot.margin = margin(18, 24, 16, 18)
   )
 
@@ -131,7 +129,7 @@ ggsave(
   file.path(output_dir, "Yield_Effects_for_General_Audience.png"),
   yield_figure,
   width = 10.5,
-  height = 7.5,
+  height = 8.0,
   dpi = 320,
   bg = "white"
 )
@@ -169,33 +167,33 @@ cropland_figure <- ggplot(cropland_plot_data, aes(x = estimate, y = y)) +
   geom_vline(xintercept = 0, color = "#1F2933", linewidth = 1.0) +
   geom_segment(
     aes(x = 0, xend = estimate, yend = y),
-    color = "#CDE8E2",
-    linewidth = 15,
-    lineend = "butt"
-  ) +
-  geom_segment(
-    aes(x = low, xend = high, yend = y),
-    color = "#00796B",
-    linewidth = 1.7,
+    color = "#B33A3A",
+    linewidth = 4.5,
     lineend = "round"
   ) +
   geom_segment(
-    aes(x = low, xend = low, y = 0.95, yend = 1.05),
-    color = "#00796B",
-    linewidth = 1.4
+    aes(x = low, xend = high, y = 0.87, yend = 0.87),
+    color = "#68727D",
+    linewidth = 1.5,
+    lineend = "round"
   ) +
   geom_segment(
-    aes(x = high, xend = high, y = 0.95, yend = 1.05),
-    color = "#00796B",
-    linewidth = 1.4
+    aes(x = low, xend = low, y = 0.83, yend = 0.91),
+    color = "#68727D",
+    linewidth = 1.3
   ) +
-  geom_point(color = "#00796B", size = 8) +
+  geom_segment(
+    aes(x = high, xend = high, y = 0.83, yend = 0.91),
+    color = "#68727D",
+    linewidth = 1.3
+  ) +
+  geom_point(color = "#B33A3A", size = 8) +
   annotate(
     "text",
     x = fewer_hectares,
     y = 1.13,
     label = paste0(round(fewer_hectares), " hectares lower"),
-    color = "#005F56",
+    color = "#9F2F2F",
     size = 6.2,
     fontface = "bold"
   ) +
@@ -215,13 +213,15 @@ cropland_figure <- ggplot(cropland_plot_data, aes(x = estimate, y = y)) +
     x = "Lower annual change in cultivated area",
     y = NULL,
     caption = paste(
-      "Source: MapBiomas and Hassani et al. (2020). All crops combined; pasture excluded; 1985-2017.",
       paste0(
-        "The bar starts at no difference (0); the thin line is the 95% interval (",
+        "HOW TO READ: The black line marks no difference (0). The red point is the estimate; the grey line is its 95% interval (",
         round(fewer_hectares_low), "-", round(fewer_hectares_high), " ha)."
       ),
-      "The estimate can reflect less expansion or greater contraction; it does not mean every municipality loses 65 ha.",
-      "Preferred model with year fixed effects, climate controls, and Conley standard errors (200 km).",
+      "The estimate can reflect less expansion or greater contraction; it is not an automatic loss of 65 ha in every municipality.",
+      "",
+      "METHOD: The preferred model compares neighboring municipalities and controls for year and climate.",
+      "The percentage-point coefficient is converted to hectares for a 100,000-ha municipality; Conley standard errors use 200 km.",
+      "Source: MapBiomas and Hassani et al. (2020). All crops combined; pasture excluded; 1985-2017.",
       sep = "\n"
     )
   ) +
@@ -235,7 +235,7 @@ cropland_figure <- ggplot(cropland_plot_data, aes(x = estimate, y = y)) +
     axis.title.x = element_text(size = 13, face = "bold", margin = margin(t = 12)),
     plot.title = element_text(size = 20, face = "bold", color = "#18212A"),
     plot.subtitle = element_text(size = 13, color = "#374151", lineheight = 1.05),
-    plot.caption = element_text(size = 9.5, color = "#4B5563", hjust = 0, lineheight = 1.0),
+    plot.caption = element_text(size = 10, color = "#4B5563", hjust = 0, lineheight = 1.0),
     plot.margin = margin(20, 28, 16, 20)
   )
 
@@ -243,7 +243,7 @@ ggsave(
   file.path(output_dir, "Cropland_Change_in_Hectares_for_General_Audience.png"),
   cropland_figure,
   width = 10.5,
-  height = 6.3,
+  height = 6.8,
   dpi = 320,
   bg = "white"
 )
